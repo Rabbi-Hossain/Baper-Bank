@@ -36,21 +36,25 @@ document.getElementById('withdraw-button').addEventListener('click', function(){
     const withdrawFieldString = withdrawField.value
     const withdrawFieldNumber = parseFloat(withdrawFieldString)
     
-    
-    
     withdrawField.value = ''
     if(isNaN(withdrawFieldNumber)){
         alert('please provide valid number')
         return
     }
 
-   
-
     const mainWithdraw = document.getElementById('main-withdraw')
     const mainWithdrawString = mainWithdraw.innerText
     const mainWithdrawNumber = parseFloat(mainWithdrawString)
 
-    if(withdrawFieldNumber > mainWithdrawNumber){
+    
+
+    
+
+    const mainBalanceWithdraw = document.getElementById('main-balance')
+    const mainBalanceWithdrawString = mainBalanceWithdraw.innerText
+    const mainBalanceWithdrawNumber = parseFloat(mainBalanceWithdrawString)
+
+    if(withdrawFieldNumber > mainBalanceWithdrawNumber){
         alert('bapper bank e taka nai')
         return
     }
@@ -58,12 +62,8 @@ document.getElementById('withdraw-button').addEventListener('click', function(){
     const totalSum = withdrawFieldNumber + mainWithdrawNumber
     mainWithdraw.innerText = totalSum
 
-    
-    
+  
 
-    const mainBalanceWithdraw = document.getElementById('main-balance')
-    const mainBalanceWithdrawString = mainBalanceWithdraw.innerText
-    const mainBalanceWithdrawNumber = parseFloat(mainBalanceWithdrawString)
     
     const biogAmount = mainBalanceWithdrawNumber - totalSum
     mainBalanceWithdraw.innerText = biogAmount
