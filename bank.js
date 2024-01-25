@@ -1,74 +1,66 @@
-// section step-1
-document.getElementById('deposit-button').addEventListener('click', function(){
-    
-    // please deposit field
-    const depositField = document.getElementById('deposit-field')
-    const depositValueString = depositField.value
-    const depositValueNumber = parseFloat(depositValueString)
+function inputFieldId(input){
+    const inputFieldIdValue = document.getElementById(input)
+    const inputFieldIdString = inputFieldIdValue.value
+    const inputFieldIdNumber = parseFloat(inputFieldIdString)
+    inputFieldIdValue.value = ''
+    return inputFieldIdNumber
+}
 
-    depositField.value = ''
-    if(isNaN(depositValueNumber)){
-        alert('please provide ma a valid number')
+function innerTextId(textId){
+    const innerTextIdElement = document.getElementById(textId)
+    const innerTextIdString = innerTextIdElement.innerText
+    const innerTextIdNumber = parseFloat(innerTextIdString)
+    return innerTextIdNumber
+}
+
+
+function setElementId(id,currentValue){
+    const idInput = document.getElementById(id)
+    idInput.innerText = currentValue
+}
+
+document.getElementById('deposit-button').addEventListener('click',function(){
+    
+    const depositField = inputFieldId('deposit-field')
+
+    if(isNaN(depositField)){
+        alert('please provide me a valid number')
         return
     }
-    // main deposit
-    const mainDeposit = document.getElementById('main-deposit')
-    const mainDepositString = mainDeposit.innerText
-    const mainDepositNumber = parseFloat(mainDepositString)
-    const totalAmount = depositValueNumber + mainDepositNumber
-    mainDeposit.innerText = totalAmount
-    
+
+    const mainDeposit = innerTextId('main-deposit')
+
+    const totalDeposit = depositField + mainDeposit
+
+    setElementId('main-deposit', totalDeposit)
 
     // balance
-    const totalBalance = document.getElementById('main-balance')
-    const totalBalanceString = totalBalance.innerText
-    const totalBalanceNumber = parseFloat(totalBalanceString)
-    const TotalBalanceAmount = totalBalanceNumber + depositValueNumber
-    totalBalance.innerText = TotalBalanceAmount
-    console.log(TotalBalanceAmount);
-
+    const balanceAmount = innerTextId('main-balance')
+    const totalAmount = depositField + balanceAmount
+    setElementId('main-balance', totalAmount)
+    
 })
 
-// section step-2
 
 document.getElementById('withdraw-button').addEventListener('click', function(){
-    const withdrawField = document.getElementById('withdraw-field')
-    const withdrawFieldString = withdrawField.value
-    const withdrawFieldNumber = parseFloat(withdrawFieldString)
+
+    const withdrawField = inputFieldId('withdraw-field')
     
-    withdrawField.value = ''
-    if(isNaN(withdrawFieldNumber)){
-        alert('please provide valid number')
+    if(isNaN(withdrawField)){
+        alert('please provide me a valid number')
         return
     }
 
-    const mainWithdraw = document.getElementById('main-withdraw')
-    const mainWithdrawString = mainWithdraw.innerText
-    const mainWithdrawNumber = parseFloat(mainWithdrawString)
+    const mainWithdraw = innerTextId('main-withdraw')
 
+   
     
+    const totalWithdraw = withdrawField + mainWithdraw
+    setElementId('main-withdraw', totalWithdraw)
 
-    
+    const totalMainBalance = innerTextId('main-balance')
+    const biog = totalMainBalance - withdrawField
 
-    const mainBalanceWithdraw = document.getElementById('main-balance')
-    const mainBalanceWithdrawString = mainBalanceWithdraw.innerText
-    const mainBalanceWithdrawNumber = parseFloat(mainBalanceWithdrawString)
-
-    if(withdrawFieldNumber > mainBalanceWithdrawNumber){
-        alert('bapper bank e taka nai')
-        return
-    }
-
-    const totalSum = withdrawFieldNumber + mainWithdrawNumber
-    mainWithdraw.innerText = totalSum
-
-  
-
-    
-    const biogAmount = mainBalanceWithdrawNumber - totalSum
-    mainBalanceWithdraw.innerText = biogAmount
-
-
-
-
+    setElementId('main-balance', biog)
 })
+
